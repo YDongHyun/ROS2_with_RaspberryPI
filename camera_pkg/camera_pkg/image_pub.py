@@ -13,6 +13,7 @@ class Image_pub(Node):
         self.image_pub=self.create_publisher(Image,'/image',qos_profile)
         self.img_data = cv2.VideoCapture('/dev/video0', cv2.CAP_V4L)
         self.cv_bridge = CvBridge()
+        self.timer = self.create_timer(0.05,self.publish_helloworld_msg)
 
     def publish_image_msg(self):
         msg=Image()
