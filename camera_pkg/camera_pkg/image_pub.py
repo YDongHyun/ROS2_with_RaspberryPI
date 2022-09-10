@@ -1,4 +1,3 @@
-
 import rclpy
 import cv2
 from rclpy.node import Node
@@ -11,13 +10,16 @@ class Image_pub(Node):
         super().__init__('image_pub')
         qos_profile = QoSProfile(depth=10)
         self.image_pub=self.create_publisher(Image,'/image',qos_profile)
-        self.img_data = cv2.VideoCapture('/dev/video0', cv2.CAP_V4L)
+        self.vid_data = cv2.VideoCapture('/dev/video0', cv2.CAP_V4L)
         self.cv_bridge = CvBridge()
         self.timer = self.create_timer(0.1,self.publish_image_msg)
 
     def publish_image_msg(self):
+        ret,image=self.vid_data.read()
+        img=cv2.imread(image)
+        print(img)
         msg=Image()
-        msg=self.cv_bridge.cv2_to_imgmsg(self.img_data)
+        msg=self.cv_bridge.cv2_to_imgmsg(img)
         self.image_pub.publish(msg)
 
 def main(args=None):
