@@ -30,7 +30,7 @@ def main(args=None):
     node=Image_pub()
     try:
         while(1):
-            rclpy.spin(node)
+            rclpy.spin_once(node)
             node.publish_image_msg()
 
     except KeyboardInterrupt:
