@@ -11,7 +11,7 @@ class Image_pub(Node):
         qos_profile = QoSProfile(depth=10)
         self.image_pub=self.create_publisher(CompressedImage,'/CompressedImage',qos_profile)
         self.cv_bridge = CvBridge()
-        #self.timer=self.create_timer(1,self.publish_image_msg)
+        self.timer=self.create_timer(1,self.publish_image_msg)
 
     def publish_image_msg(self): 
         msg=CompressedImage()
@@ -29,9 +29,7 @@ def main(args=None):
     rclpy.init(args=args)
     node=Image_pub()
     try:
-        while(1):
-            rclpy.spin_once(node)
-            node.publish_image_msg()
+        rclpy.spin(node)
 
     except KeyboardInterrupt:
         node.get_logger().info('Keyboard Interrupt (SIGINT)')
