@@ -11,7 +11,7 @@ class Image_pub(Node):
         qos_profile = QoSProfile(depth=10)
         self.image_pub=self.create_publisher(CompressedImage,'/CompressedImage',qos_profile)
         self.cv_bridge = CvBridge()
-        self.timer=self.create_timer(0.1,self.publish_image_msg)
+        self.timer=self.create_timer(0.05,self.publish_image_msg)
 
     def publish_image_msg(self): 
         msg=CompressedImage()
