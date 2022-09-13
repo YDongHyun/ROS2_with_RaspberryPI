@@ -20,7 +20,7 @@ class Image_pub(Node):
         vid_data.set(4,480)
         #while(vid_data.isOpened()):
         ret,image=vid_data.read()            
-        msg=self.cv_bridge.cv2_to_imgmsg(image)
+        msg=self.cv_bridge.cv2_to_compressed_imgmsg(image)
         self.image_pub.publish(msg)
         print("published")
         vid_data.release()
