@@ -23,7 +23,7 @@ class Image_pub(Node):
         msg=self.cv_bridge.cv2_to_imgmsg(image)
         self.image_pub.publish(msg)
         print("published")
-        cap.release()
+        vid_data.release()
 
 def main(args=None):
     rclpy.init(args=args)
