@@ -1,5 +1,6 @@
 import rclpy
 import cv2
+import time
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
 from sensor_msgs.msg import CompressedImage
@@ -11,9 +12,10 @@ class Image_pub(Node):
         qos_profile = QoSProfile(depth=10)
         self.image_pub=self.create_publisher(CompressedImage,'/CompressedImage',qos_profile)
         self.cv_bridge = CvBridge()
-        self.timer=self.create_timer(1,self.publish_image_msg)
+        #self.timer=self.create_timer(1,self.publish_image_msg)
 
     def publish_image_msg(self): 
+        start = time.time()
         msg=CompressedImage()
         vid_data = cv2.VideoCapture('/dev/video0',cv2.CAP_V4L)
         vid_data.set(3,640)
@@ -24,12 +26,15 @@ class Image_pub(Node):
         self.image_pub.publish(msg)
         print("published")
         vid_data.release()
+        print("time :", time.time() - start) 
 
 def main(args=None):
     rclpy.init(args=args)
     node=Image_pub()
     try:
-        rclpy.spin(node)
+        while(1):
+            rclpy.spin_once(node)
+            node.publish_image_msg()
 
     except KeyboardInterrupt:
         node.get_logger().info('Keyboard Interrupt (SIGINT)')
