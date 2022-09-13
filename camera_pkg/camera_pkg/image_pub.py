@@ -14,7 +14,7 @@ class Image_pub(Node):
         self.timer=self.create_timer(1,self.publish_image_msg)
 
     def publish_image_msg(self): 
-        msg=CImage()
+        msg=Image()
         vid_data = cv2.VideoCapture('/dev/video0',cv2.CAP_V4L)
         vid_data.set(3,640)
         vid_data.set(4,480)
