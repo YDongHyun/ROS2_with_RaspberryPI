@@ -1,6 +1,5 @@
 import rclpy
 import cv2
-import time
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
 from sensor_msgs.msg import CompressedImage
@@ -15,7 +14,6 @@ class Image_pub(Node):
         #self.timer=self.create_timer(1,self.publish_image_msg)
 
     def publish_image_msg(self): 
-        start = time.time()
         msg=CompressedImage()
         vid_data = cv2.VideoCapture('/dev/video0',cv2.CAP_V4L)
         vid_data.set(3,640)
@@ -26,7 +24,6 @@ class Image_pub(Node):
         self.image_pub.publish(msg)
         print("published")
         vid_data.release()
-        print("time :", time.time() - start) 
 
 def main(args=None):
     rclpy.init(args=args)
