@@ -1,40 +1,38 @@
-#include <chrono>
-#include <functional>
-#include <memory>
-#include <string>
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/image.hpp>
+#include "opencv2/opencv.hpp"
+#include <cv_bridge/cv_bridge.h>
 
-#include "rclcpp/rclcpp.hpp"
-#include "sensor_msgs/msg/CompreesedImage.hpp"
+using namespace cv;
 
-using namespace std::chrono_literals;
-
-class Image_Pub : public rclcpp::Node
+class Image_Pub : publish rclcpp::Node
 {
-public:
-  image_publisher()
-  : Node("img_publisher"), count_(0)
+  public:
+    Image_Pub()
+    : Node("image_pub")
+    {
+      image_pub_=this->create_publisher<sensor_msg::msg::Image>("/Image",10);
+    }
+  
+  private:
+  void image_publisher()
   {
-    publisher_ = this->create_publisher<std_msgs::msg::CompreesedImage>("/CompressedImage", 10);
+    auto msg = sensor_msg::msg::Image();
+    cv_bridge::CvImage img_bridge;
+    VideoCapture cap(0); 
+    Mat image;
+    cap >> image;
+    cv::Mat image = cv::imread(argv[1], CV_LOAD_IMAGE_COLOR);
+    sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image).toImageMsg();
+    image_pub_->publish(msg);
   }
+  rclcpp::Publisher<sensor_msg::msg::Image>::SharedPtr image_pub_;
+}
 
-private:
-  void publish_msg()
-  {
-    vid_data = VideoCapture capture(".\\video.avi");
-    auto msg = std_msgs::msg::CompreesedImage();
-    msg = 
-    RCLCPP_INFO(this->get_logger(), "Published");
-    publisher_->publish(msg);
-  }
-};
-
-int main(int argc, char * argv[])
-{
-  rclcpp::init(argc, argv);
-  while (1){
-    rclcpp::spin_once(std::make_shared<image_publisehr>());
-    Image_pub.publish_msg();
-  }
+int main(int argc,char *argv[]){
+  rclcpp::init(argc,argv);
+  auto node = std::make_shared<Image_Pub>();
+  rclcpp::spin(node);
   rclcpp::shutdown();
   return 0;
 }
