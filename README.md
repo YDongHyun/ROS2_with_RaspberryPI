@@ -10,4 +10,11 @@ Ubuntu Server 20.04 설치 및 ROS2 설치
 ## camera 실시간 송신
 python과 opencv로 제작한 camera node를 실행한 결과 PI의 하드웨어적 한계때문에 초당 2프레임으로 Publish 한다.
 따라서 picamera를 사용하여 노드를 제작한다.
-먼저 우분투 20.04 32bit로 설치한다. (64bit의 경우 mmal오류 발생)
+
+-  우분투 20.04 32bit 설치. (64bit의 경우 mmal오류 발생)
+-  아래 명령어를 복사하여 raspi-config를 설치한다.
+```
+$ wget http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/pool/main/r/raspi-config/raspi-config_20201108_all.deb
+$ sudo apt install lua5.1  libatopology2 libfftw3-single3 libsamplerate0 alsa-utils
+$ sudo dpkg -i raspi-config_20201108_all.deb
+```
