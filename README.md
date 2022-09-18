@@ -8,5 +8,6 @@ Ubuntu Server 20.04 설치 및 ROS2 설치
 
 
 ## camera 실시간 송신
-python으로 제작한 camera node를 실행한 결과 PI의 하드웨어적 한계때문에 초당 2프레임으로 Publish 하였다.
-c++을 이용하
+python과 opencv로 제작한 camera node를 실행한 결과 PI의 하드웨어적 한계때문에 초당 2프레임으로 Publish 한다.
+따라서 picamera를 사용하여 노드를 제작한다.
+먼저 우분투 20.04 32bit로 설치한다. (64bit의 경우 mmal오류 발생)
