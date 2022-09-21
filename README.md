@@ -18,3 +18,4 @@ $ wget http://mirrors.ustc.edu.cn/archive.raspberrypi.org/debian/pool/main/r/ras
 $ sudo apt install lua5.1  libatopology2 libfftw3-single3 libsamplerate0 alsa-utils
 $ sudo dpkg -i raspi-config_20201108_all.deb
 ```
+- 32bit 설치시 apt update가 안되는 오류 
