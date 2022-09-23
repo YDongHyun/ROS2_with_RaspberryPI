@@ -15,7 +15,7 @@ class Image_pub(Node):
 
     def publish_image_msg(self): 
         msg=CompressedImage()
-        vid_data = cv2.VideoCapture('/dev/video0',cv2.CAP_DSHOW)
+        vid_data = cv2.VideoCapture('/dev/video0',cv2.CAP_V4L)
         vid_data.set(cv2.CAP_PROP_FRAME_WIDTH,640)
         vid_data.set(cv2.CAP_PROP_FRAME_HEIGHT,480)
         vid_data.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'))
