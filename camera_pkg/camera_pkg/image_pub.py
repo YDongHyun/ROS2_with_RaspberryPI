@@ -3,7 +3,7 @@ import cv2
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
 from sensor_msgs.msg import CompressedImage
-from cv_bridge import CvBridge
+from cv_bridge import CvBridge,CvBridgeError
 
 class Image_pub(Node):
     def __init__(self):
