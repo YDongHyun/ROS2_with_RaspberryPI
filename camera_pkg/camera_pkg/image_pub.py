@@ -16,8 +16,8 @@ class Image_pub(Node):
     def publish_image_msg(self): 
         msg=CompressedImage()
         vid_data = cv2.VideoCapture('/dev/video0',cv2.CAP_V4L)
-        vid_data.set(3,640)
-        vid_data.set(4,480)
+        vid_data.set(cv2.CAP_PROP_FRAME_WIDTH,640)
+        vid_data.set(cv2.CAP_PROP_FRAME_HEIGHT,480)
         #while(vid_data.isOpened()):
         ret,image=vid_data.read()            
         msg=self.cv_bridge.cv2_to_compressed_imgmsg(image)
