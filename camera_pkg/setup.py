@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
         'image_pub = camera_pkg.image_pub:main',
         'image_pub2 = camera_pkg.image_pub2:main',
+        'image_sub2 = camera_pkg.image_sub2:main',
         ],
     },
 )
