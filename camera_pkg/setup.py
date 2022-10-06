@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
         'image_pub = camera_pkg.image_pub:main',
+        'image_pub2 = camera_pkg.image_pub2:main',
         ],
     },
 )
