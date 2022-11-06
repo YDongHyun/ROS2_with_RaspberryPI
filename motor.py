@@ -16,8 +16,8 @@ while True:
     elif keyboard.read_key() == "s":
         motor_r.backward(speed=0.5)
         motor_l.backward(speed=0.5)
-	elif keyboard.read_key() == "d":
+    elif keyboard.read_key() == "d":
         motor_r.backward(speed=0.5)
         motor_l.foward(speed=0.5)
-	else:
-		continue
+    else:
+        continue
