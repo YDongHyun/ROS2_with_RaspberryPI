@@ -18,3 +18,9 @@ def press(key):
     elif key=="d":
         motor_r.backward(speed=0.5)
         motor_l.forward(speed=0.5)
+    elif key=="space":
+        motor_r.forward(speed=0)
+        motor_l.backward(speed=0)
+
+listen_keyboard(on_press=press)
+
